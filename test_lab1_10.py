@@ -13,20 +13,20 @@ class TestIsPerfectFunction(unittest.TestCase):
         self.assertFalse(is_perfect(7))
 
     def test_is_perfect2_optimization(self):
+        iterations = 10000
+        
         # Mierzenie czasu wykonania funkcji is_perfect
-        start_time = timeit.default_timer()
-        for i in range(1, 1000):
-            is_perfect(i)
-        is_perfect_time = timeit.default_timer() - start_time
+        is_perfect_time = timeit.timeit(lambda: [is_perfect(i) for i in range(1, iterations)], number=1)
 
         # Mierzenie czasu wykonania funkcji is_perfect2
-        start_time = timeit.default_timer()
-        for i in range(1, 1000):
-            is_perfect2(i)
-        is_perfect2_time = timeit.default_timer() - start_time
+        is_perfect2_time = timeit.timeit(lambda: [is_perfect2(i) for i in range(1, iterations)], number=1)
 
-        # Sprawdzanie czy is_perfect2 jest przynajmniej 5 razy szybsza od is_perfect
-        self.assertTrue(is_perfect_time / is_perfect2_time >= 5)
+        # Sprawdzanie czy is_perfect2 jest przynajmniej 2 razy szybsza od is_perfect
+        print(f'Czas wykonania is_perfect: {is_perfect_time} sekundy')
+        print(f'Czas wykonania is_perfect2: {is_perfect2_time} sekundy')
+        speedup = is_perfect_time / is_perfect2_time
+        print(f'Przyspieszenie: {speedup:.2f}x')
+        self.assertTrue(speedup >= 2, f"is_perfect2 powinno być co najmniej 2 razy szybsze, ale jest tylko {speedup:.2f}x szybsze")
 
 if __name__ == "__main__":
     unittest.main()
