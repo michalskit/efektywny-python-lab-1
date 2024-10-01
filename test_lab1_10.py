@@ -1,4 +1,4 @@
-# lab1_7_test.py
+# test_lab1_10.py
 import unittest
 import timeit
 from lab1_10 import is_perfect, is_perfect2

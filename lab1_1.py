@@ -1,3 +1,3 @@
-def avg(input_list):
-    """Return the average of a list of numbers."""
+def srednia(lista_wejsciowa):
+    """ Zwraca średnią z listy liczb. """
     pass

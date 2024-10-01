@@ -1,3 +1,3 @@
 def even_list(n):
-    """Funkcja powinna zwrocic liste liczb parzystych <= n"""
+    """Funkcja powinna zwrocic liste dodatnich liczb parzystych <= n"""
     pass
