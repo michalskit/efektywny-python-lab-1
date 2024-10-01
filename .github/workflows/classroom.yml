@@ -3,7 +3,6 @@ name: Autograding Tests
 on:
   - push
   - workflow_dispatch
-  - repository_dispatch
 
 permissions:
   checks: write
@@ -42,9 +41,12 @@ jobs:
           fi
         done
         echo "points=$points" >> $GITHUB_OUTPUT
+        echo "POINTS=$points" >> $GITHUB_ENV
+      continue-on-error: true
 
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
+      if: always()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TEST_RESULTS: ${{ steps.run-tests.outputs.points }}
@@ -52,3 +54,4 @@ jobs:
         runners: run-tests
 
     - uses: education/autograding@v1
+      if: always()
